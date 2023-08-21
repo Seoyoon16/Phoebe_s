@@ -1,0 +1,89 @@
+@딥러닝 개론
+
+인공지능 ) 머신러닝 ) 딥러닝
+
+#Machine Learning
+-트리계열
+Decision tree - 의사결정
+
+-SVM
+support vector machine - 빠른
+직선에서 가장 수직거리가 가까운 점이 서포트벡터
+직선과 서포트벡터 사이의 거리인 마진을 최대화
+
+-신경망
+히든 레이어(은닉층)의 수가 많은 구조의 신경망이 딥러닝
+
+#Deep Learning
+깊은 신경망 구조의 머신러닝
+input - (((신경망))) - output
+end to end(종단간 구조)
+종류: MLP(multi-layer-perceptron), CNN, RNN, Transformer
+
+Transformer: self-attention 구조 사용
+
+딥러닝: 성능 좋음(예측력 높음)
+머신러닝: 해석력 좋음, 어떤 특성이 어떤 역할을 하는지, 어떤 특성이 중요한지 알고 이를 조절해 예측력을 높일 수 있음
+
+#학습
+Command: if/else가 핵심
+Learning/training: 모델이 데이터를 받아 예측, 정답과의 오차를 계산해 피드백(학습), 예측력이 높은 모델로 계속 변화 - 개발자가 예측 못한 인풋도 처리가능
+깊은 신경망: 은닉층의 개수가 많아지면 복잡한 특성을 추출하고 학습 할 수 있음
+학습: 점점 더 좋은 예측을 하는 모델로 만들어가는 것
+
+-데이터셋 분할
+객관적인 평가를 위해 train set과 test set으로 split
+train set for 학습, test set for 평가 (8:2)
+분할방법: random(shuffle 중요), stratify(층화 추출; 클래스 별로 추출)
+validation set: train set에서 한번 더 분할(0.2), 학습 중 일반화 성능 평가를 위함, validation 성능이 감소하는 구간이 생김(overfitting, 과적합 구간),
+                hyperparameter를 어떤 식으로 바꿔가며 실험을 해야 학습이 잘 될지 지표 만드는 역할
+
+-a project using CIFAR10 dataset
+동물 사진 분류
+
+-lable(정답)
+label --학습--> model
+ground-truth: 정확한 레이블, 실제값
+
+-지도학습(supervised learning)
+dataset = data + label
+대부분의 경우 지도학습
+
+-비지도학습(unsupervised learning)
+dataset = data
+labeling -> 비용 많이 듦
+labeling이 까다로운 경우 비지도학습이 유용
+ex) k-means clusting(군집화)
+
+-반지도학습(semi-supervised learning)
+ex) pseudo-labeling: label을 model에 지도학습, label이 없는 데이터셋을 model을 이용해서 labeling(예측값) with confidence 참고(기준을 넘긴 값만 사용),
+                     이렇게 만든 데이터셋을 기존의 데이터셋에 추가하여 다시 모델 학습
+                     (많은 데이터셋 -> 성능향상)
+
+-선형회귀(linear regression)
+Linear Regression: 선을 그어 값을 예측한다
+a. 데이터를 일반화하는 선을 찾는다
+b. 그 선을 이용해 새로운 데이터를 예측한다
+y=ax+b, x=10이라면 예측값=10a+b
+
+신경망 입장에서, (x 변수임, 곱하기 아님!!)
+H(x) = w1x1 +w2x2+w3x3 +bias
+(w = 가중치, x=특성)
+
+-편향(bias)
+b, y절편
+bias를 반영해야 예측력이 더 좋아짐
+
+-회귀직선
+H(x)=Wx+b
+(H=hypothesis=예측값, W=가중치, b=bias, x=특성값)
+error = H(x)-y
+(y=label)
+
+-비용함수(cost function)
+cost=1/n<시그마>(H(x^i)-y^i)^2
+=1/n<시그마>에러^2
+=에러들의 합
+
+-입력과 출력
+특성들(input) --가중합+b--> 새로운 특성(output)
