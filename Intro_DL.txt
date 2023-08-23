@@ -144,3 +144,56 @@ weight [1]
 데이터 포인터 추가, 가중치 그대로
 -데이터 행렬에 열 추가
 데이터 포인터 그대로, 가중치 추가
+
+-경사하강법(gradient descent)
+단계적으로 오차함수를 조금씩 줄여가며 반복적으로 가중치를 개선해 가며 최적의 가중치를 찾아가는 방법
+
+-비용함수
+convex
+
+-비용함수 업데이트
+새로운 w = 원래 w + (기울기 반대방향)
+기울기가 음수이면 오른쪽(+), 기울기가 양수이면 왼쪽(-)
+w := w - @(ac)/(aw)
+ac/aw: 기울기, cost/w
+(w: 가중치, a: 편미분 기호, @: 학습률 상수)
+
+-학습률(learning rate, lr)
+학습률이 너무 높을 경우: 많은 이동으로 최적값을 지나 업데이트 될 가능성 높음, 오히려 최적값에서 멀어짐
+학습률이 너무 낮은 경우: 조금씩 이동해서 시간이 오래걸림
+
+-미분과 편미분(partial differential)
+ex) y = 2x1 + 3x2
+미분 dy/dx -> x1, x2에 대해 모두 미분
+편미분 ay/ax1 -> 2 (x1에 대해서만 미분, x2는 상수취급)
+
+-Optimizer: 최적화 방법
+
+-Gradient Descent
+기울기를 구해서 기울기의 반대방향으로 학습률과 기울기의 곱만큼 이동시킨다
+
+-SGD(Stochastic Gradient Descent)
+Batch GD
+수많은 데이터를 신경망에 통과시킨 후 오차들을 더해 cost를 구한 뒤 업데이트 진행, Batch란 데이터세트 전체의 개수, 데이터세트 한바퀴 돌고 난 후 가중치 업데이트 진행
+
+Mini-batch GD / Single sample GD
+미니: Batch를 여러 개로 쪼갠 후 각각 loss를 구한 후 업데이트 진행
+(cost: batch에 대한 에러의 총합, loss: mini-batch에 대한 에러의 총합)
+싱글: 하나의 샘플에 대해 에러를 계산하고 그것을 바로 업데이트
+
+(Stochastic: 확률적, 무작위)
+
+-Momentum
+SGD + Momentun(관성)
+local minimum을 global minimum으로 착각하기 쉬움 --> 관성의 도움을 받음
+torch.optim.SGD(..., momentum=0.9)
+
+-AdaGrad
+SGD + adaptive 학습률 감소(learning rate decay)
+
+-RMSprop
+AdaGRad + gradient decay
+
+-Adam
+가장 유명, 자주 쓰임, 디폴트
+Adagrad(RMSprop) + Momentum
