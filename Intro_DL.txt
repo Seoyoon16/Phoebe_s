@@ -197,3 +197,6 @@ AdaGRad + gradient decay
 -Adam
 가장 유명, 자주 쓰임, 디폴트
 Adagrad(RMSprop) + Momentum
+
+
+-역전파(back propagation)
