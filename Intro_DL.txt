@@ -200,3 +200,63 @@ Adagrad(RMSprop) + Momentum
 
 
 -역전파(back propagation)
+오차들의 합, 즉 cost를 모델에 역전파 시켜 학습시킴 -> 모델의 가중치 부분이 업데이트 됨 (가중치 매트릭스를 변형, 다양한 optimizer 사용)
+
+수많은 가중치들에 대해 다 계산을 해야할까? NO
+chain rule: a층에서 b층으로 갈 때의 변화율과 b층에서 c층으로 갈 때의 변화율의 관계를 이용하여 효율적으로 연산
+
+-연쇄법칙(chain rule)
+A가 1만큼 변했을 때 C는 얼만큼 변하는가? 기울기, 순간변화율 개념
+AC기울기 = BC기울기 x AB기울기
+ex) B = 2A + 1, C = 5B - 3
+-> AC기울기 = 5 x 2 = 10
+
+W(eight)C(ost)기울기 = OC x ZO WZ
+(O = output, Z = 노드값/중간값)
+
+-PyTorch
+변수.backward()
+
+-ReLU 미분
+ReLU(x) = x (x>0)
+          0 (x<=0)
+ReLU를 x에 대해 미분 = 1 (x>0)
+                       0 (x<=0)
+굉장히 효율적
+
+미분 가능한지 체크하는 것이 중요 (미분 불가시 역전파 불가)
+참고: CS231n
+
+-소프트맥스(softmax)
+출력 노드(예측값)이 두 개일 때(분류 문제)
+ex) 개 1 0 (피쳐: 개인지 아닌지/고양이인지 아닌지)
+    냥 0 1
+
+예측값을 확률값으로 변환
+ex) 예측값1(h1=1.6), 예측값2(h2=0.4)
+h/(h1+h2)
+cls1 80%, cls2 20%
+->예측 값이 음수일 경우 문제(음수 확률값, divide by zero)
+해결: e라는 자연상수를 이용해 지수함수로 바꿈; 두 값을 e의 지수로 사용
+
+e^x
+x->-무한대: e^x->0
+x=0: e^x=1
+x->무한대: e^x=무한대
+
+소프트맥스 함수
+softmax(zi) = e^zi / 시그마e^zk (k=1~K)
+확률값 = e^h / (e^h1 + e^h2)
+(각 확률값 모두 더하면 1)
+
+-크로스엔트로피(cross-entropy)
+엔트로피(entropy): 물리학에서는 불확실성
+
+정보량(Information)
+I = -logp(x) (p(x)는 어떤 사건A가 발생할 확률)
+y = logx,
+p(x)->0 : I->무한대
+p(x)->1 : I->0
+
+Entropy: Average information, 정보량의 기댓값
+H = -시그마{p(xi)logp(xi)} (i=1~N)
