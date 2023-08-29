@@ -1,0 +1,10 @@
+-grayscale
+흑백 pixel
+value: 0~255 (black<->white)
+          : 0~1 <- normalization
+
+-RGB
+channel: red, green, blue
+육면체가 있을 때, 높이 h, 가로 a, 세로 c
+c가 channel
+유사) HSV, Lab

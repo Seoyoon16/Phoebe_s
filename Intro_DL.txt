@@ -257,6 +257,23 @@ I = -logp(x) (p(x)는 어떤 사건A가 발생할 확률)
 y = logx,
 p(x)->0 : I->무한대
 p(x)->1 : I->0
+정보량이 많으려면 해당 사건이 발생할 확률이 적어야 함
 
 Entropy: Average information, 정보량의 기댓값
 H = -시그마{p(xi)logp(xi)} (i=1~N)
+같은 비율로 확률이 존재하는 경우 엔트로피 증가
+
+크로스 엔트로피
+CE(p,q) = -시그마q(xi)logp(xi) (i=1~N)
+p와 q 두 분포 사이의 엔트로피를 계산
+
+softmax 처리를 한 예측 값 p(확률값), 정답 q
+ex) p   0.6   0.4
+    q    1     0
+       cls1  cls2
+-1 x log 0.6 + -0 x log 0.4 = -log 0.6
+정답에 해당하는 클래스의 연산만이 필요
+
+왜 크로스 엔트로피를 loss/cost fuction으로 사용할까?
+100% confidence로 정답을 예측하는 경우 loss/cost = 0 (오답: 무한)
+높은 확률로 오답일 경우 가중치 변화를 크게 잡음 (두 분포 간 차이가 클 때 cost 증가)
