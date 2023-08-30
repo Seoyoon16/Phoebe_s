@@ -8,3 +8,35 @@ channel: red, green, blue
 육면체가 있을 때, 높이 h, 가로 a, 세로 c
 c가 channel
 유사) HSV, Lab
+
+-이미지 필터(filters)
+sharpen filter, blur filter...
+filter = kernel
+
+ 필터 연산
+filter * image
+*: pixel-wise, 같은 위치끼리 곱하고 그 곱을 다 더함
+output image의 첫번째 픽셀에 그 값 적용
+실습링크: https://setosa.io/ev/image-kernels/
+
+-합성곱 연산(convolution)
+신경망에 이미지 입력
+ex) 5 by 5 pixel -> 25개의 특성(input)으로
+신경망을 거쳐 하나의 값 출력
+지역적 위치 정보 사라짐 -> 현재 거의 사용 x -> 합성곱 연산 사용
+
+Convolution
+5 by 5 --convolution--> 3 by 3 result
+result는 압축된 값을 가지고 있음 (+regional info)
+단순히 픽셀들을 입력으로 넣는 것과는 다름
+레이어를 거치면서 input 이미지 상에서의 region의 크기 점차 증 -> 최종적으로 상세하고 많은 정보를 가진 feature를 통해 예측 진행
+
+Pixel matrix: 이미지를 pixel의 value들이 존재하는 matrix 형태로 표현
+
+padding
+zero padding: 0으로 한 바퀴를 감싸주는 기법
+거의 필수적으로 사용
+input size를 동일하게 유지할 수 있음
+
+stride
+연산할 때 하나의 pixel이 아닌 n개의 pixel을 이동시킴
