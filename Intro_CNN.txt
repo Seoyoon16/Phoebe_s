@@ -40,3 +40,61 @@ input size를 동일하게 유지할 수 있음
 
 stride
 연산할 때 하나의 pixel이 아닌 n개의 pixel을 이동시킴
+
+-Chanel
+(c, w, h)
+(3, 256. 256) -- filter: 5개 --> (5, 256, 256) -- filter: 20개 --> (20, 256, 256)
+feature map 생성
+
+-Max poling
+4x4 -- max pooling --> 2x2
+ex)
+150 125 100 80
+110 90 140 58
+85 120 75 120
+230 210 140 190
+
+150 140
+230 190
+
+자매품) averge pooling(평균값 사용)
+
+parameter 수를 줄이기 위해 사용
+
+-채널 계산
+224x224x64 --> 224x224x128
+max pooling + 128개 필터 사용됨
+
+-CNN
+신경망과 CNN
+n개의 filter, n개의 feature map, n개의 채널
+
+fc layer node 개수 = 예측을 진행할 class 수
+
+-CNN 코드
+// 신경망 구조
+
+// 모델정의
+class Net(nn.module): // 상속받음
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(3, 64, 5) // input channel, output channel, kernel size
+        self.conv2 = nn.Conv2d(64, 128, 5)
+        self.fc = nn.Linear(128*5*5, 10)
+
+// 구성해놓은 레이어들을 어떻게 연결시킬 것인지
+def forward(self, x):
+    x = F.relu(self.con1(x)) // 비선형 변환
+    x = F.max_pool2d(x, 2) // 2 by 2 pooling
+    x = F.relu(self.conv2(x))
+    x = F.max_pool2d(x, 2)
+    x = torch.flatten(x, 1) // 한 줄로 펴서
+    x = self.fc(x) // fc 레이어 통과시킴
+    return x
+
+// 실행
+net = Net() // object 생성
+output = net(input) // 출력 계산
+loss = criterion(output, target) // 출력과 정답(target)을 이용해 loss 계산
+loss.backward() // 역전파
+optimizer.step() // 가중치 업데이트
