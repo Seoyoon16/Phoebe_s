@@ -98,3 +98,17 @@ output = net(input) // 출력 계산
 loss = criterion(output, target) // 출력과 정답(target)을 이용해 loss 계산
 loss.backward() // 역전파
 optimizer.step() // 가중치 업데이트
+
+-CNN 역전파
+x1~x5, w1~w3, o1~o3
+
+o1 = w1x1 + w2x2 + w3x3
+o2 = w1x2 + w2x3 + w3x4
+o3 = w1x3 + w2x4 +w3x5
+
+o1에 대한 w1의 영향 = x1
+o2에 대한 w1의 영향 = x2
+o3에 대한 w1의 영향 = x3
+(편미분)
+
+신경망의 역전파와 유사
