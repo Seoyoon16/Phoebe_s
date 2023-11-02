@@ -1,0 +1,43 @@
+#1 이미지 분류 (Image Classification)
+Input image -- CNN Model --> Class
+models: LeNet, VGGNet, ResNet...
+
+model 구성
+(backbone)(classifier, fc layers)
+
+모델의 backbone
+conv layers가 존재하는 부분
+feature extractor, 신경망을 통과하면서 특성 추출
+
+이미지 분류 데이터셋 구축
+클래스 별로 폴더 생성, 이미지 넣음
+1) .../폴더명/...jpg 일 때 폴더명을 보고 해당하는 레이블에 넣어줌 (폴더명은 클래스명)
+ex) imgs/airplane/fly_high.jpg
+2) 자매품: 파일명을 클래스를 포함해서 짓기
+ex) images/airplane_001.jpg
+3) lable.txt 를 별도로 만들어 레이블링 가능, 파일명과 레이블 함께 명시
+
+ResNet 레지넷
+gradient vanishing
+층이 깊어질 수록 기울기 소실, w가 업데이트 되어야하는데 w = w- a 에서 a가 영으로 수렴하기 때문에 업데이트가 안됨
+-> 해결: 잔차
+지름길 추가: skip connection 을 통해 이전 값을 복사한 후 전달
+최종적인 다음층으로의 아웃풋: F(x) + x
+
+#2 객체 검출 (object detection)
+localization + classification + multiple object
+localization: 어떠한 이미지가 들어왔을 때 어떠한 location에 이미지가 위치하고 있는지 출력
+classification: 어떤 클래스에 속하는 오브젝트인지 분류
+여기까지가 single object detection
+multiple object(+multiple classes): 여러 오브젝트에 대해 객체 task 수행
+여기까지 하면 object detection
+
+객체 검출 데이터셋 구축
+레이블링: point1, point2, 레이블
+(point: 좌상, 우하)
+ex) (30, 1100), (90, 1200), 0
+레이블링 자동화 툴o
+
+YOLO (you only look once)
+one-stage detection
+real-time
