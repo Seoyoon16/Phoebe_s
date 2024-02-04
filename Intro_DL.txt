@@ -2,12 +2,58 @@
 
 인공지능 ) 머신러닝 ) 딥러닝
 
+# 들어가면서...
+-머신러닝 알고리즘 종류
+1. 지도 학습(Supervised Learning):
+선형 회귀(Linear Regression),
+로지스틱 회귀(Logistic Regression),
+결정 트리(Decision Trees),
+랜덤 포레스트(Random Forests),
+서포트 벡터 머신(Support Vector Machines, SVM),
+K-최근접 이웃(K-Nearest Neighbors, KNN),
+나이브 베이즈(Naive Bayes)
+
+2. 비지도 학습(Unsupervised Learning):
+K-평균 군집화(K-Means Clustering),
+DBSCAN,
+계층적 군집화(Hierarchical Clustering),
+PCA(주성분 분석, Principal Component Analysis),
+t-SNE(t-distributed Stochastic Neighbor Embedding),
+
+3. 반지도 학습(Semi-Supervised Learning):
+심층 신뢰 신경망(Deep Belief Networks),
+심층 유사도 신경망(Deep Similarity Networks),
+심층 생성 신경망(Deep Generative Networks),
+
+4. 강화 학습(Reinforcement Learning):
+Q-Learning,
+딥 Q-네트워크(Deep Q-Networks, DQN),
+정책 그래디언트(Policy Gradient),
+
+-딥러닝 알고리즘 종류:
+1. 인공 신경망(Neural Networks):
+다층 퍼셉트론(Multilayer Perceptron, MLP),
+컨볼루션 신경망(Convolutional Neural Networks, CNN),
+순환 신경망(Recurrent Neural Networks, RNN),
+장단기 메모리(Long Short-Term Memory, LSTM),
+변형 어텐션(transformer)
+
+2. 생성 모델(Generative Models):
+생성적 적대 신경망(Generative Adversarial Networks, GAN),
+변이형 오토인코더(Variational Autoencoders, VAE),
+자기 회귀 모델(Autoregressive Models)
+
+3. 강화 학습(Reinforcement Learning):
+딥 Q-네트워크(Deep Q-Networks, DQN),
+정책 그래디언트(Policy Gradient),
+어드밴티지 액터-크리틱(Advantage Actor-Critic, A2C)
+
 #Machine Learning
 -트리계열
 Decision tree - 의사결정
 
 -SVM
-support vector machine - 빠른
+support vector machine - 빠름
 직선에서 가장 수직거리가 가까운 점이 서포트벡터
 직선과 서포트벡터 사이의 거리인 마진을 최대화
 
@@ -21,6 +67,8 @@ end to end(종단간 구조)
 종류: MLP(multi-layer-perceptron), CNN, RNN, Transformer
 
 Transformer: self-attention 구조 사용
+입력 시퀀스 내의 각 위치에 대해 해당 위치와 다른 모든 위치 간의 상대적인 관계를 계산하는 메커니즘
+입력의 각 원소가 다른 모든 원소와 상호 작용할 수 있는 능력을 제공 -> 모델이 긴 범위의 의존성을 쉽게 학습
 
 딥러닝: 성능 좋음(예측력 높음)
 머신러닝: 해석력 좋음, 어떤 특성이 어떤 역할을 하는지, 어떤 특성이 중요한지 알고 이를 조절해 예측력을 높일 수 있음
@@ -52,13 +100,18 @@ dataset = data + label
 -비지도학습(unsupervised learning)
 dataset = data
 labeling -> 비용 많이 듦
-labeling이 까다로운 경우 비지도학습이 유용
+labeling이 까다로운 경우, 데이터에 정답이 없는 경우 비지도학습이 유용
+대량의 데이터 때려넣어 패턴발견 후 학습
 ex) k-means clusting(군집화)
 
 -반지도학습(semi-supervised learning)
 ex) pseudo-labeling: label을 model에 지도학습, label이 없는 데이터셋을 model을 이용해서 labeling(예측값) with confidence 참고(기준을 넘긴 값만 사용),
                      이렇게 만든 데이터셋을 기존의 데이터셋에 추가하여 다시 모델 학습
                      (많은 데이터셋 -> 성능향상)
+
+-강화학습(reinforcement learning)
+에이전트(학습하는 주체, 모델)가 환경과 상호작용하며 보상을 최대화하기 위한 행동을 선택하는 방법을 학습
+시행착오를 통해 학습, 최적의 행동을 찾아가는 과정에서 학습이 이루어짐
 
 -선형회귀(linear regression)
 Linear Regression: 선을 그어 값을 예측한다
@@ -69,6 +122,7 @@ y=ax+b, x=10이라면 예측값=10a+b
 신경망 입장에서, (x 변수임, 곱하기 아님!!)
 H(x) = w1x1 +w2x2+w3x3 +bias
 (w = 가중치, x=특성)
+(데이터를 토대로 w, bias를 컴퓨터가 찾음; 오차를 최소화하는 형태로)
 
 선형회귀 구조는 예측이 그 자체로서 완료되는 형태
 
@@ -91,16 +145,52 @@ cost=1/n<시그마>(H(x^i)-y^i)^2
 특성들(input) --가중합+b--> 새로운 특성(output)
 
 -신경망(neural networks)
+인간의 뇌 구조를 모방하여 만들어진 수학적 모델
+여러 개의 연결된 뉴런(노드)으로 구성
+뉴런들은 입력을 받아 출력을 생성하는데, 이 과정에서 가중치와 활성화 함수 사용
+
+-퍼셉트론(perceptron)
+가장 간단한 형태의 인공 신경망
+하나 이상의 입력을 받아 각 입력에 대해 가중치를 적용하고 이들을 합산한 후 활성화 함수를 통과시켜 하나의 출력을 생성
+이진 분류(Binary Classification)를 수행하거나 선형 분리 가능한 문제를 해결하는 데 사용
+
+신경망은 여러 층의 퍼셉트론으로 구성
+학습 과정에서 가중치를 조정하여 입력과 출력 사이의 관계를 학습
+학습은 일반적으로 오차 역전파(backpropagation) 알고리즘을 사용
 
 -선형변환
+행렬과 벡터의 곱, 입력 벡터를 새로운 공간으로 변환하는 선형 함수
+입력 벡터의 각 요소에 대해 일정한 스케일링 및 이동을 적용하여 새로운 벡터를 생성
+
 입력(10) -> f:2x+1 -> g:-x+10 -> 출력(-11)
 >> h(x) = -(2x+1)+10 = -2x+9 (f와 g의 합성함수)
 입력(10) -> h -> 출력(-11)
 수많은 레이어를 쌓아도 하나의 레이어로 치환가능
+(여러 층의 선형 변환만을 연결한 경우, 전체 신경망이 하나의 선형 변환으로 표현)
 결국은 하나의 레이어를 가진 신경망이 되어 깊은 신경망으로서의 의미x
 깊이 유지x --해결--> 비선형변형 추가
 
 -비선형변환
+비선형함수
+a. 시그모이드 함수(Sigmoid Function): 
+입력 값을 0과 1 사이의 값으로 변환
+주로 이진 분류 문제에서 확률을 모델링하는 데 사용 - 로지스틱 회귀(Logistic Regression)
+σ(x)
+
+b. 하이퍼볼릭 탄젠트 함수(Hyperbolic Tangent Function, tanh):
+입력 값을 -1과 1 사이의 값으로 변환
+신경망의 은닉층에서 주로 사용, 입력값의 스케일을 조정
+tanh(x)
+
+c. 렐루 함수(Rectified Linear Unit, ReLU):
+입력이 양수인 경우 입력 값을 그대로 출력하고, 음수인 경우 0으로 출력하는 함수
+신경망에서 널리 사용되는 활성화 함수 중 하나
+
+d. 소프트맥스 함수(Softmax Function):
+다중 클래스 분류 문제에서 출력을 확률로 변환
+각 클래스에 대한 확률을 계산하여 출력
+softmax(xi)
+
 sigmoid
 sigmoid(x)=1/1+e^-x (e: 2.718)
 input -> f -> 비선형변환 -> g -> output
@@ -123,33 +213,66 @@ ReLU: x < 0, f(x) = 0
 Sigmoid는 기울기 소실(gradient vanishing) 문제점 존재
 가중치를 업데이트 할 때 기울기 정보를 사용하는데 역전파가 될 때 가중치에 대한 기울기 뿐만 아니라 활성화 함수에 대한 기울기도 함께 계산됨
 
+-gradient vanishing
+역전파(backpropagation) 알고리즘이 깊은 신경망에서 층을 거슬러 올라갈 때 기울기(gradient)가 소실되는 현상
+신경망이 깊어지면, 역전파 알고리즘을 통해 기울기가 출력층에서 입력층으로 전파
+각 층을 거슬러 올라갈수록 기울기가 곱해지는 과정이 반복되는데,
+만약 각각의 기울기가 1보다 작은 값인 경우, 이 곱셈 연산을 거치면서 기울기가 지수적으로 소실될 수 있음
+
+문제점:
+신경망의 하위 층들은 거의 업데이트되지 않고 학습이 제대로 이루어지지 않음
+입력이 크거나 작을 때, 함수의 기울기가 0에 가까워짐 - 기울기 소실
+
+해결:
+ReLU같은 활성화 함수 사용
+Batch Normalization과 같은 정규화 기법을 사용
+Heinitialization과 같은 적절한 가중치 초기화 방법을 사용
+
 -데이터 행렬
-one-hot encoding
+one-hot encoding: 범주형 데이터를 수치형 데이터로 변환하는 방법
 ex) 서울: 0, 광역시: 1, 지방: 2
 -> 단순한 인덱싱인데 수학적으로는 지방 = 광역시 x2 로 해석될 여지가 있음
-따라서 (1, 0, 0) / (0, 1, 0) / (0, 0, 1) 식으로 바꿔줌
+따라서 (1, 0, 0) / (0, 1, 0) / (0, 0, 1) 식으로 바꿔줌 - 범주형 변수의 각 카테고리를 이진 벡터로 표현
 
 -데이터 행렬과 가중치 행렬(weight matrix)
 data [1 2 3]
-     [4 5 6]
+      [4 5 6]
 weight [1]
-       [1]
-       [0]
+         [1]
+         [0]
  행렬곱 = 1x1 + 2x1 + 3x0 = 3
-                4x1 + 5x1 + 6x0 = 9
-          [3]
-          [9]
+             4x1 + 5x1 + 6x0 = 9
+        [3]
+        [9]
 
--데이터 행렬에 행 추가
-데이터 포인터 추가, 가중치 그대로
--데이터 행렬에 열 추가
+-데이터 행렬에 행 추가(기존의 데이터 행렬에 새로운 데이터를 추가, 데이터셋 확장)
+데이터 포인터 추가, 가중치(모델 파라미터) 그대로
+새로운 데이터가 기존의 모델 파라미터에 영향을 미치지 않고 추가
+데이터셋의 증분 학습(incremental learning)
+
+-데이터 행렬에 열 추가(기존의 데이터 행렬에 새로운 특성 or 변수 추가)
 데이터 포인터 그대로, 가중치 추가
 
 -경사하강법(gradient descent)
 단계적으로 오차함수를 조금씩 줄여가며 반복적으로 가중치를 개선해 가며 최적의 가중치를 찾아가는 방법
+함수의 기울기를 활용하여 함수의 최솟값을 찾는 최적화 알고리즘
+
+기울기의 방향은 함수가 증가하는 방향을 나타내므로, 최솟값을 찾기 위해서는 기울기의 반대 방향으로 이동
+이동 거리는 학습률에 의해 결정 - 너무 작으면 수렴 속도가 느리고, 너무 크면 최솟값을 지나칠 수 있음
+
+주어진 함수의 형태나 데이터의 분포에 관계없이 적용할 수 있는 일반적인 최적화 알고리즘
+대부분의 비선형 최적화 문제에서 효과적
 
 -비용함수
-convex
+모델의 예측과 실제 값 사이의 차이(비용, 손실, 에러)를 측정하는 데 사용
+loss: 모델이 주어진 데이터에 대해 얼마나 잘 예측하는지를 평가하는데 사용
+
+회귀 문제에서는 주로 평균 제곱 오차(Mean Squared Error, MSE)를 사용
+분류 문제에서는 크로스 엔트로피 손실(Cross-Entropy Loss)이나 로그 손실(Log Loss)과 같은 손실 함수 사용
+
+볼록 함수(Convex)는 함수의 그래프가 임의의 두 점을 선택했을 때 선택한 두 점 사이의 선분이 그래프 위에 있도록 만드는 함수
+지역 최솟값(local minimum)이 전역 최솟값(global minimum)과 일치
+최적화 과정이 보다 안정적이고 신속
 
 -비용함수 업데이트
 새로운 w = 원래 w + (기울기 반대방향)
@@ -158,9 +281,33 @@ w := w - @(ac)/(aw)
 ac/aw: 기울기, cost/w
 (w: 가중치, a: 편미분 기호, @: 학습률 상수)
 
+-비용함수 vs 손실함수
+일반적으로 비용 함수는 모든 훈련 데이터에 대한 평균 손실을 계산하는 함수를 가리킴
+모델이 훈련 데이터 전체에 대해 얼마나 잘 예측하는지를 측정
+모델의 매개 변수(가중치 및 편향)를 최적화하는 데 사용
+ex) MSE
+
+손실 함수는 모델의 예측값과 실제값 사이의 차이를 측정하는 함수를 가리킴
+모델이 개별 데이터 포인트에 대해 얼마나 잘 예측하는지를 평가, 모델의 학습 과정 중에 사용
+ex) Cross-Entropy Loss
+
+(loss function이 cost function의 하위 개념)
+
 -학습률(learning rate, lr)
 학습률이 너무 높을 경우: 많은 이동으로 최적값을 지나 업데이트 될 가능성 높음, 오히려 최적값에서 멀어짐
 학습률이 너무 낮은 경우: 조금씩 이동해서 시간이 오래걸림
+
+-overfitting
+모델이 훈련 데이터에 너무 맞춰져서 새로운 데이터에 대한 일반화 성능이 저하되는 현상
+즉, 모델이 훈련 데이터에 너무 잘 맞게 되어서 훈련 데이터에 대한 예측은 좋지만, 새로운 데이터에 대한 예측력은 떨어지는 상황을 의미
+주로 모델이 훈련 데이터의 노이즈나 이상치까지 학습하여 발생
+학습 곡선으로 모델의 성능이 학습 데이터에 과적합되는 현상을 파악
+
+방지:
+더 많은 데이터를 사용하여 모델이 더 일반적인 패턴을 학습하도록 함
+모델의 복잡도 줄이기 - 모델의 파라미터 수를 줄이거나, 모델에 규제(regularization)를 추가
+교차 검증(cross-validation)을 사용
+조기 종료(early stopping) - 과적합되기 전에 학습을 멈추는 기법으로 검증 데이터의 손실이 증가하기 시작할 때 학습 종료
 
 -미분과 편미분(partial differential)
 ex) y = 2x1 + 3x2
@@ -197,7 +344,6 @@ AdaGRad + gradient decay
 -Adam
 가장 유명, 자주 쓰임, 디폴트
 Adagrad(RMSprop) + Momentum
-
 
 -역전파(back propagation)
 오차들의 합, 즉 cost를 모델에 역전파 시켜 학습시킴 -> 모델의 가중치 부분이 업데이트 됨 (가중치 매트릭스를 변형, 다양한 optimizer 사용)

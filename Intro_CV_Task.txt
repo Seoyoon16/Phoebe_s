@@ -41,3 +41,5 @@ ex) (30, 1100), (90, 1200), 0
 YOLO (you only look once)
 one-stage detection
 real-time
+
+#3
